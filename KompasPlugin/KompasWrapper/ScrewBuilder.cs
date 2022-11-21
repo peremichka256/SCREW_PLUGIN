@@ -29,7 +29,7 @@ namespace KompasWrapper
         /// <summary>
         /// Глубина шлица
         /// </summary>
-        private const double SLITE_DEPTH = 0.9999;
+        private const double SLITE_DEPTH = 1.2;
 
         /// <summary>
         /// Угол выреза шлица
@@ -58,12 +58,14 @@ namespace KompasWrapper
 
             //Построение основных частей винта
             BuildRod(_parameters.ScrewLength, _parameters.BaseDiameter,
-                _parameters.IndentLength);
-            BuildHead(_parameters.HeadDiameter, _parameters.SliteLength);
+                _parameters.IndentLength, _parameters.HeadDiameter);
+            BuildHead(_parameters.HeadDiameter, _parameters.SliteLength, _parameters.BaseDiameter);
 
             //Создание скругления между головкой и стержнем
-            var xCoordOfEdge = _parameters.BaseDiameter / 2;
-            var yCoordOfEdge = _parameters.HeadDiameter / 2 - _parameters.BaseDiameter / 2;
+            
+            var xCoordOfEdge = Convert.ToDouble(_parameters.BaseDiameter) / 2;
+            var yCoordOfEdge = Convert.ToDouble(_parameters.HeadDiameter) / 2 -
+                Convert.ToDouble(_parameters.BaseDiameter) / 2;
             var zCoordOfEdge = 0;
             CreateChamfer(_parameters.FilletRadius,
                 xCoordOfEdge, yCoordOfEdge, zCoordOfEdge, true);
@@ -74,7 +76,7 @@ namespace KompasWrapper
         /// </summary>
         /// <param name="headDiameter">Диаметр головки</param>
         /// <param name="slitLength">Длина шлица</param>
-        private void BuildHead(int headDiameter, int slitLength)
+        private void BuildHead(double headDiameter, double slitLength, double baseDiameter)
         {
             //Создание головки
             var sketch = CreateSketch(Obj3dType.o3d_planeXOZ);
@@ -82,7 +84,7 @@ namespace KompasWrapper
             doc2d.ksCircle(0, 0, headDiameter / 2, MainLineStyle);
 
             sketch.EndEdit();
-            СreateExtrusion(sketch, headDiameter/2 - _parameters.BaseDiameter/2);
+            СreateExtrusion(sketch, headDiameter /2 - baseDiameter / 2);
 
             //Вырезание шлица
             var slitWidth = slitLength / 4;
@@ -98,9 +100,9 @@ namespace KompasWrapper
 
             //Создание фаски на головке
             var xCoordOfEdge = headDiameter / 2;
-            var yCoordOfEdge = headDiameter / 2 - _parameters.BaseDiameter / 2;
+            var yCoordOfEdge = headDiameter / 2 - baseDiameter / 2;
             var zCoordOfEdge = 0;
-            CreateChamfer(headDiameter / 2 - _parameters.BaseDiameter / 2,
+            CreateChamfer(headDiameter / 2 - baseDiameter / 2,
                 xCoordOfEdge, yCoordOfEdge, zCoordOfEdge, false);
         }
 
@@ -110,7 +112,7 @@ namespace KompasWrapper
         /// <param name="screwLength">Общая длина винта</param>
         /// <param name="baseDiameter">Диаметр основанмя стержня</param>
         /// <param name="indentLength">Длина отсупа</param>
-        private void BuildRod(int screwLength, int baseDiameter, int indentLength)
+        private void BuildRod(double screwLength, double baseDiameter, double indentLength, double headDiameter)
         {
             var sketch = CreateSketch(Obj3dType.o3d_planeXOZ);
             var doc2d = (ksDocument2D)sketch.BeginEdit();
@@ -120,7 +122,7 @@ namespace KompasWrapper
             СreateExtrusion(sketch, screwLength);
 
             //Создание фаски на конце винта
-            var xCoordOfEdge = _parameters.BaseDiameter / 2;
+            var xCoordOfEdge = -baseDiameter / 2;
             var yCoordOfEdge = screwLength;
             var zCoordOfEdge = 0;
             CreateChamfer(_parameters.FilletRadius,
@@ -128,11 +130,10 @@ namespace KompasWrapper
 
             //Создание резьбы
             //Создание вырезающего элемента
-            var threadBeginning = indentLength + _parameters.HeadDiameter / 2 
-                - _parameters.BaseDiameter / 2;
+            var threadBeginning = indentLength + headDiameter / 2 
+                - baseDiameter / 2;
             var threadSketch = CreateSketch(Obj3dType.o3d_planeXOY, null);
             var threadDoc2d = (ksDocument2D)threadSketch.BeginEdit();
-            //threadDoc2d.ksRectangle(DrawRectangle(baseDiameter/2 - 1, threadBeginning, 0.5, 1));
             threadDoc2d.ksCircle(baseDiameter / 2, threadBeginning, 0.25, MainLineStyle);
             threadSketch.EndEdit();
 

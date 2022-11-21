@@ -1,6 +1,5 @@
 ﻿namespace Core
 {
-
     /// <summary>
     /// Класс хранящий параметры винта
     /// </summary>
@@ -10,42 +9,42 @@
         /// Общая длина винта
         /// </summary>
         private static Parameter _screwLength =
-            new Parameter(ParameterNames.ScrewLength,
+            new(ParameterNames.ScrewLength,
                 MAX_SCREW_LENGTH, MIN_SCREW_LENGTH);
 
         /// <summary>
         /// Длина шлица
         /// </summary>
         private static Parameter _sliteLength =
-            new Parameter(ParameterNames.SlitLength,
+            new(ParameterNames.SlitLength,
                 MAX_SLITE_LENGTH, MIN_SLITE_LENGTH);
 
         /// <summary>
         /// Радиус скругления
         /// </summary>
         private static Parameter _filletRadius =
-            new Parameter(ParameterNames.FilletRadius,
+            new(ParameterNames.FilletRadius,
                 MAX_FILLET_RADIUS, MIN_FILLET_RADIUS);
 
         /// <summary>
         /// Диаметр головки
         /// </summary>
         private static Parameter _headDiameter =
-            new Parameter(ParameterNames.HeadDiameter,
+            new(ParameterNames.HeadDiameter,
                 MAX_HEAD_DIAMETER, MIN_HEAD_DIAMETER);
 
         /// <summary>
         /// Диаметр основанмя стержня
         /// </summary>
         private static Parameter _baseDiameter =
-            new Parameter(ParameterNames.BaseDiameter,
+            new(ParameterNames.BaseDiameter,
                 MAX_BASE_DIAMETER, MIN_BASE_DIAMETER);
 
         /// <summary>
         /// Длина отсупа
         /// </summary>
         private static Parameter _indentLength =
-            new Parameter(ParameterNames.IndentLength,
+            new(ParameterNames.IndentLength,
                 MAX_INDENT_LENGTH, MIN_INDENT_LENGTH);
 
         /// <summary>
@@ -53,7 +52,7 @@
         /// </summary>
         private Dictionary<ParameterNames, Parameter>
             _parametersDictionary =
-                new Dictionary<ParameterNames, Parameter>
+                new()
                 {
                     {_screwLength.Name, _screwLength},
                     {_sliteLength.Name, _sliteLength},
@@ -68,7 +67,7 @@
         /// Минимальные значения являются дефолтными
         /// </summary>
         public const int MIN_SCREW_LENGTH = 22;
-        public const int MAX_SCREW_LENGTH = 25;
+        public const int MAX_SCREW_LENGTH = 26;
 
         public const int MIN_SLITE_LENGTH = 10;
         public const int MAX_SLITE_LENGTH = 13;
@@ -91,7 +90,7 @@
         public const int SLITE_HEAD_DIFFERENCE = 2;
 
         /// <summary>
-        /// Задаёт или возвращает диаметр ручки
+        /// Задаёт или возвращает общую длину винта
         /// </summary>
         public int ScrewLength
         {
@@ -100,16 +99,20 @@
         }
 
         /// <summary>
-        /// Задаёт или возвращает высоту ручки
+        /// Задаёт или возвращает длину шлица
         /// </summary>
         public int SliteLength
         {
             get => _sliteLength.Value;
-            set => _sliteLength.Value = value;
+            set
+            {
+                _sliteLength.Value = value;
+                _headDiameter.Value = value + SLITE_HEAD_DIFFERENCE;
+            }
         }
 
         /// <summary>
-        /// Задаёт или возвращает ввысоту бойка
+        /// Задаёт или возвращает радиус скругления
         /// </summary>
         public int FilletRadius
         {
@@ -118,16 +121,20 @@
         }
 
         /// <summary>
-        /// Задаёт или возвращает длину бойка
+        /// Задаёт или возвращает диаметр головки
         /// </summary>
         public int HeadDiameter
         {
             get => _headDiameter.Value;
-            set => _headDiameter.Value = value;
+            set
+            {
+                _headDiameter.Value = value;
+                _sliteLength.Value = value - SLITE_HEAD_DIFFERENCE;
+            }
         }
 
         /// <summary>
-        /// Задаёт или возвращает ширину бойка
+        /// Задаёт или возвращает диаметр основанмя стержня
         /// </summary>
         public int BaseDiameter
         {
@@ -136,7 +143,7 @@
         }
 
         /// <summary>
-        /// Задаёт или возвращает размер фаски на бойке
+        /// Задаёт или возвращает размер длину отсупа
         /// </summary>
         public int IndentLength
         {
@@ -169,10 +176,10 @@
                 switch (name)
                 {
                     case ParameterNames.SlitLength:
-                        HeadDiameter = value;
+                        SliteLength = value;
                         break;
                     case ParameterNames.HeadDiameter:
-                        BaseDiameter = value;
+                        HeadDiameter = value;
                         break;
                     default:
                         _parametersDictionary.TryGetValue(name,

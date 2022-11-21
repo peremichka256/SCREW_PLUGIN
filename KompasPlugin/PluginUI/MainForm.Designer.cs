@@ -28,14 +28,13 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.BuildButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
-            this.label4 = new System.Windows.Forms.Label();
-            this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.ScrewLengthTextBox = new System.Windows.Forms.TextBox();
             this.SliteLengthTextBox = new System.Windows.Forms.TextBox();
@@ -43,16 +42,19 @@
             this.HeadDiameterTextBox = new System.Windows.Forms.TextBox();
             this.BaseDiameterTextBox = new System.Windows.Forms.TextBox();
             this.IndentLengthTextBox = new System.Windows.Forms.TextBox();
+            this.label4 = new System.Windows.Forms.Label();
+            this.label5 = new System.Windows.Forms.Label();
             this.WaveguideParametersPictureBox = new System.Windows.Forms.PictureBox();
+            this.toolTip = new System.Windows.Forms.ToolTip(this.components);
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WaveguideParametersPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // BuildButton
             // 
-            this.BuildButton.Location = new System.Drawing.Point(272, 305);
+            this.BuildButton.Location = new System.Drawing.Point(277, 305);
             this.BuildButton.Name = "BuildButton";
-            this.BuildButton.Size = new System.Drawing.Size(87, 23);
+            this.BuildButton.Size = new System.Drawing.Size(82, 23);
             this.BuildButton.TabIndex = 0;
             this.BuildButton.Text = "BUILD";
             this.BuildButton.UseVisualStyleBackColor = true;
@@ -95,7 +97,7 @@
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(176, 13);
             this.label1.TabIndex = 0;
-            this.label1.Text = "L - Total length of screw (22-25 mm)";
+            this.label1.Text = "L - Total length of screw (22-26 mm)";
             // 
             // label2
             // 
@@ -104,7 +106,7 @@
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(243, 26);
             this.label2.TabIndex = 1;
-            this.label2.Text = "M - Length of slite (10-13 mm)  should be less than  Dk + 2 mm";
+            this.label2.Text = "M - Length of slite (10-13 mm)  should be less than  Dk - 2 mm";
             // 
             // label3
             // 
@@ -114,24 +116,6 @@
             this.label3.Size = new System.Drawing.Size(136, 13);
             this.label3.TabIndex = 2;
             this.label3.Text = "R -  Radius of fillet (1-2 mm)";
-            // 
-            // label4
-            // 
-            this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 135);
-            this.label4.Name = "label4";
-            this.label4.Size = new System.Drawing.Size(224, 26);
-            this.label4.TabIndex = 3;
-            this.label4.Text = "Dk  - Diameter of head (10-13 mm)  should be more than  M + 2 mm";
-            // 
-            // label5
-            // 
-            this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 180);
-            this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(183, 13);
-            this.label5.TabIndex = 4;
-            this.label5.Text = "D - Diameter of the rod base (5-6 mm)";
             // 
             // label6
             // 
@@ -148,6 +132,8 @@
             this.ScrewLengthTextBox.Name = "ScrewLengthTextBox";
             this.ScrewLengthTextBox.Size = new System.Drawing.Size(79, 20);
             this.ScrewLengthTextBox.TabIndex = 6;
+            this.ScrewLengthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.ScrewLengthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // SliteLengthTextBox
             // 
@@ -155,6 +141,8 @@
             this.SliteLengthTextBox.Name = "SliteLengthTextBox";
             this.SliteLengthTextBox.Size = new System.Drawing.Size(79, 20);
             this.SliteLengthTextBox.TabIndex = 7;
+            this.SliteLengthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.SliteLengthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // FilletRadiusTextBox
             // 
@@ -162,6 +150,8 @@
             this.FilletRadiusTextBox.Name = "FilletRadiusTextBox";
             this.FilletRadiusTextBox.Size = new System.Drawing.Size(79, 20);
             this.FilletRadiusTextBox.TabIndex = 8;
+            this.FilletRadiusTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.FilletRadiusTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // HeadDiameterTextBox
             // 
@@ -169,6 +159,8 @@
             this.HeadDiameterTextBox.Name = "HeadDiameterTextBox";
             this.HeadDiameterTextBox.Size = new System.Drawing.Size(79, 20);
             this.HeadDiameterTextBox.TabIndex = 9;
+            this.HeadDiameterTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.HeadDiameterTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // BaseDiameterTextBox
             // 
@@ -176,6 +168,8 @@
             this.BaseDiameterTextBox.Name = "BaseDiameterTextBox";
             this.BaseDiameterTextBox.Size = new System.Drawing.Size(79, 20);
             this.BaseDiameterTextBox.TabIndex = 10;
+            this.BaseDiameterTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.BaseDiameterTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
             // 
             // IndentLengthTextBox
             // 
@@ -183,13 +177,33 @@
             this.IndentLengthTextBox.Name = "IndentLengthTextBox";
             this.IndentLengthTextBox.Size = new System.Drawing.Size(79, 20);
             this.IndentLengthTextBox.TabIndex = 11;
+            this.IndentLengthTextBox.Validating += new System.ComponentModel.CancelEventHandler(this.TextBox_Validating);
+            this.IndentLengthTextBox.Validated += new System.EventHandler(this.TextBox_Validated);
+            // 
+            // label4
+            // 
+            this.label4.AutoSize = true;
+            this.label4.Location = new System.Drawing.Point(3, 135);
+            this.label4.Name = "label4";
+            this.label4.Size = new System.Drawing.Size(224, 26);
+            this.label4.TabIndex = 3;
+            this.label4.Text = "Dk  - Diameter of head (12-15 mm)  should be more than  M + 2 mm";
+            // 
+            // label5
+            // 
+            this.label5.AutoSize = true;
+            this.label5.Location = new System.Drawing.Point(3, 180);
+            this.label5.Name = "label5";
+            this.label5.Size = new System.Drawing.Size(183, 13);
+            this.label5.TabIndex = 4;
+            this.label5.Text = "D - Diameter of the rod base (5-6 mm)";
             // 
             // WaveguideParametersPictureBox
             // 
             this.WaveguideParametersPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("WaveguideParametersPictureBox.Image")));
             this.WaveguideParametersPictureBox.Location = new System.Drawing.Point(377, 28);
             this.WaveguideParametersPictureBox.Name = "WaveguideParametersPictureBox";
-            this.WaveguideParametersPictureBox.Size = new System.Drawing.Size(177, 300);
+            this.WaveguideParametersPictureBox.Size = new System.Drawing.Size(151, 300);
             this.WaveguideParametersPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.WaveguideParametersPictureBox.TabIndex = 65;
             this.WaveguideParametersPictureBox.TabStop = false;
@@ -198,7 +212,7 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(559, 340);
+            this.ClientSize = new System.Drawing.Size(542, 340);
             this.Controls.Add(this.WaveguideParametersPictureBox);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.BuildButton);
@@ -229,6 +243,7 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox WaveguideParametersPictureBox;
+        private System.Windows.Forms.ToolTip toolTip;
     }
 }
 
