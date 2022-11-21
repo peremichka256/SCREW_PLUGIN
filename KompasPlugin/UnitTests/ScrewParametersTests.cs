@@ -11,7 +11,7 @@ namespace UnitTests
         /// Свойство возвращающее новый обект класса MalletParameters
         /// </summary>
         private ScrewParameters DefaultParameters =>
-            new ScrewParameters();
+            new();
 
         /// <summary>
         /// Словарь имён и максимальных значений параметров
@@ -71,7 +71,7 @@ namespace UnitTests
                 }
             }
 
-            Assert.Zero(errorCounter,
+            Assert.That(errorCounter, Is.Zero,
                 "Значения не были помещены в сеттеры параметров");
         }
 
@@ -104,14 +104,14 @@ namespace UnitTests
                     parameterMaxValue.Key, parameterMaxValue.Value);
             }
 
-            Assert.IsTrue(testMalletParameters.ScrewLength
+            Assert.That(testMalletParameters.ScrewLength
                           == ScrewParameters.MAX_SCREW_LENGTH
                           && testMalletParameters.FilletRadius
                           == ScrewParameters.MAX_FILLET_RADIUS
                           && testMalletParameters.BaseDiameter
                           == ScrewParameters.MAX_BASE_DIAMETER
                           && testMalletParameters.IndentLength
-                          == ScrewParameters.MAX_INDENT_LENGTH,
+                          == ScrewParameters.MAX_INDENT_LENGTH, Is.True,
                 "Возникает, если геттер вернул не то значение");
         }
 
