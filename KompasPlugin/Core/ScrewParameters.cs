@@ -156,12 +156,12 @@
         /// </summary>
         public ScrewParameters()
         {
-            this.ScrewLength = MIN_SCREW_LENGTH;
-            this.SliteLength = MIN_SLITE_LENGTH;
-            this.FilletRadius = MIN_FILLET_RADIUS;
-            this.HeadDiameter = MIN_HEAD_DIAMETER;
-            this.BaseDiameter = MIN_BASE_DIAMETER;
-            this.IndentLength = MIN_INDENT_LENGTH;
+            ScrewLength = MIN_SCREW_LENGTH;
+            SliteLength = MIN_SLITE_LENGTH;
+            FilletRadius = MIN_FILLET_RADIUS;
+            HeadDiameter = MIN_HEAD_DIAMETER;
+            BaseDiameter = MIN_BASE_DIAMETER;
+            IndentLength = MIN_INDENT_LENGTH;
         }
 
         /// <summary>
@@ -199,30 +199,6 @@
         {
             _parametersDictionary.TryGetValue(name, out var parameter);
             return parameter.Value;
-        }
-
-        /// <summary>
-        /// Метод возвращающий минимальное возможное значение параметра
-        /// по имени
-        /// </summary>
-        /// <param name="name">Имя параметра</param>
-        /// <returns>Значения минимума</returns>
-        public int GetParameterMinByName(ParameterNames name)
-        {
-            _parametersDictionary.TryGetValue(name, out var parameter);
-            return parameter.Min;
-        }
-
-        /// <summary>
-        /// Метод возвращающий максимальное возможное значение параметра
-        /// по имени
-        /// </summary>
-        /// <param name="name">Имя параметра</param>
-        /// <returns>Значения максимума</returns>
-        public int GetParameterMaxByName(ParameterNames name)
-        {
-            _parametersDictionary.TryGetValue(name, out var parameter);
-            return parameter.Max;
         }
     }
 }
