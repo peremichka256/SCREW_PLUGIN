@@ -29,6 +29,11 @@ namespace PluginUI
         /// </summary>
         private Dictionary<TextBox, ParameterNames> _textBoxesDictionary;
 
+        /// <summary>
+        /// Словарь содержащие пары (Текстбокс, корректное ли значение в нём)
+        /// </summary>
+        private Dictionary<TextBox, bool> _isValueInTextBoxCorrect;
+
         public MainForm()
         {
             InitializeComponent();
@@ -41,6 +46,16 @@ namespace PluginUI
                 {HeadDiameterTextBox, ParameterNames.HeadDiameter},
                 {BaseDiameterTextBox, ParameterNames.BaseDiameter},
                 {IndentLengthTextBox, ParameterNames.IndentLength}
+            };
+
+            _isValueInTextBoxCorrect = new Dictionary<TextBox, bool>
+            {
+                {ScrewLengthTextBox, true},
+                {SliteLengthTextBox, true},
+                {FilletRadiusTextBox, true},
+                {HeadDiameterTextBox, true},
+                {BaseDiameterTextBox, true},
+                {IndentLengthTextBox, true}
             };
 
             foreach (var textBox in _textBoxesDictionary)
@@ -62,27 +77,19 @@ namespace PluginUI
             _screwBuilder.BuildScrew();
         }
 
-        /// <summary>
-        /// Устанавливает стиль для проверенного значения
-        /// </summary>
-        /// <param name="sender">Текстбокс</param>
-        private void TextBox_Validated(object sender, EventArgs e)
+        private void TextBox_TextChanged(object sender, EventArgs e)
         {
-            if (sender is TextBox textBox)
-            {
-                BuildButton.Enabled = true;
-                textBox.BackColor = Color.White;
-                toolTip.Active = false;
-            }
+            if (!(sender is TextBox textBox)) return;
+
+            Validating(textBox);
         }
+
 
         /// <summary>
         /// Общий метод валидации текстбокса
         /// </summary>
-        private void TextBox_Validating(object sender, CancelEventArgs e)
+        private void Validating(TextBox textBox)
         {
-            if (!(sender is TextBox textBox)) return;
-
             try
             {
                 _textBoxesDictionary.TryGetValue(textBox,
@@ -100,14 +107,32 @@ namespace PluginUI
                     SliteLengthTextBox.Text =
                         _screwParameters.SliteLength.ToString();
                 }
+
+                //Значение в текстбоксе правильное
+                _isValueInTextBoxCorrect[textBox] = true;
+                bool isTextBoxesValuesCorrect = true;
+
+                foreach (var isValueCorrect in _isValueInTextBoxCorrect)
+                {
+                    isTextBoxesValuesCorrect &= isValueCorrect.Value;
+                }
+
+                //Проверяем, можно ли активировать кнопку
+                if (isTextBoxesValuesCorrect)
+                {
+                    BuildButton.Enabled = true;
+                }
+                textBox.BackColor = Color.White;
+                toolTip.Active = false;
             }
             catch (Exception exception)
             {
+                //Значение в текстбоксе неправильное
                 BuildButton.Enabled = false;
                 textBox.BackColor = Color.LightSalmon;
                 toolTip.Active = true;
                 toolTip.SetToolTip(textBox, exception.Message);
-                e.Cancel = true;
+                _isValueInTextBoxCorrect[textBox] = false;
             }
         }
     }

@@ -50,12 +50,12 @@ namespace UnitTests
                             + "в сеттер параметра по его имени")]
         public void TestSetParameterByName()
         {
-            var testMalletParameters = DefaultParameters;
+            var testScrewParameters = DefaultParameters;
 
             foreach (var parameterMaxValue
                      in _maxValuesOfParameterDictionary)
             {
-                testMalletParameters.SetParameterByName(
+                testScrewParameters.SetParameterByName(
                     parameterMaxValue.Key, parameterMaxValue.Value);
             }
 
@@ -64,7 +64,7 @@ namespace UnitTests
             foreach (var parameterMaxValue
                      in _maxValuesOfParameterDictionary)
             {
-                if (testMalletParameters.GetParameterValueByName(
+                if (testScrewParameters.GetParameterValueByName(
                         parameterMaxValue.Key) != parameterMaxValue.Value)
                 {
                     errorCounter++;
@@ -78,16 +78,16 @@ namespace UnitTests
         [Test(Description = "Тест на геттер значения параметра по имени")]
         public void TestGetParameterByName()
         {
-            var testMalletParameters = DefaultParameters;
+            var testScrewParameters = DefaultParameters;
 
             var newValue = (ScrewParameters.MIN_SCREW_LENGTH
                             + ScrewParameters.MIN_SCREW_LENGTH) / 2;
             ParameterNames testParameterName =
                 ParameterNames.ScrewLength;
-            testMalletParameters
+            testScrewParameters
                 .SetParameterByName(testParameterName, newValue);
 
-            Assert.That(testMalletParameters
+            Assert.That(testScrewParameters
                     .GetParameterValueByName(testParameterName), Is.EqualTo(newValue),
                 "Из геттера вернулось неверное значение");
         }
@@ -95,22 +95,22 @@ namespace UnitTests
         [Test(Description = "Позитивный тест на геттеры параметров")]
         public void TestParameterGet()
         {
-            var testMalletParameters = DefaultParameters;
+            var testScrewParameters = DefaultParameters;
 
             foreach (var parameterMaxValue
                      in _maxValuesOfParameterDictionary)
             {
-                testMalletParameters.SetParameterByName(
+                testScrewParameters.SetParameterByName(
                     parameterMaxValue.Key, parameterMaxValue.Value);
             }
 
-            Assert.That(testMalletParameters.ScrewLength
+            Assert.That(testScrewParameters.ScrewLength
                           == ScrewParameters.MAX_SCREW_LENGTH
-                          && testMalletParameters.FilletRadius
+                          && testScrewParameters.FilletRadius
                           == ScrewParameters.MAX_FILLET_RADIUS
-                          && testMalletParameters.BaseDiameter
+                          && testScrewParameters.BaseDiameter
                           == ScrewParameters.MAX_BASE_DIAMETER
-                          && testMalletParameters.IndentLength
+                          && testScrewParameters.IndentLength
                           == ScrewParameters.MAX_INDENT_LENGTH, Is.True,
                 "Возникает, если геттер вернул не то значение");
         }
@@ -118,14 +118,14 @@ namespace UnitTests
         [Test(Description = "Тест на сеттер диаметра головки")]
         public void TestHeadDiameter_Set()
         {
-            var testMalletParameters = DefaultParameters;
+            var testScrewParameters = DefaultParameters;
 
-            testMalletParameters.HeadDiameter = ScrewParameters.MAX_HEAD_DIAMETER;
-            testMalletParameters.SliteLength = ScrewParameters.MAX_HEAD_DIAMETER
+            testScrewParameters.HeadDiameter = ScrewParameters.MAX_HEAD_DIAMETER;
+            testScrewParameters.SliteLength = ScrewParameters.MAX_HEAD_DIAMETER
                 - ScrewParameters.SLITE_HEAD_DIFFERENCE;
-            testMalletParameters.SliteLength = ScrewParameters.MIN_SLITE_LENGTH;
+            testScrewParameters.SliteLength = ScrewParameters.MIN_SLITE_LENGTH;
 
-            Assert.That(testMalletParameters.HeadDiameter, Is.EqualTo(ScrewParameters.MIN_SLITE_LENGTH
+            Assert.That(testScrewParameters.HeadDiameter, Is.EqualTo(ScrewParameters.MIN_SLITE_LENGTH
                 + ScrewParameters.SLITE_HEAD_DIFFERENCE),
                 "Сеттер не поменял знаечние зависимого параметра");
         }
@@ -133,14 +133,14 @@ namespace UnitTests
         [Test(Description = "Тест на сеттер длины шлица")]
         public void TestSlitLength_Set()
         {
-            var testMalletParameters = DefaultParameters;
+            var testScrewParameters = DefaultParameters;
 
-            testMalletParameters.HeadDiameter = ScrewParameters.MAX_HEAD_DIAMETER;
-            testMalletParameters.SliteLength = ScrewParameters.MAX_HEAD_DIAMETER
+            testScrewParameters.HeadDiameter = ScrewParameters.MAX_HEAD_DIAMETER;
+            testScrewParameters.SliteLength = ScrewParameters.MAX_HEAD_DIAMETER
                 - ScrewParameters.SLITE_HEAD_DIFFERENCE;
-            testMalletParameters.HeadDiameter = ScrewParameters.MIN_HEAD_DIAMETER;
+            testScrewParameters.HeadDiameter = ScrewParameters.MIN_HEAD_DIAMETER;
 
-            Assert.That(testMalletParameters.SliteLength, Is.EqualTo(ScrewParameters.MIN_HEAD_DIAMETER
+            Assert.That(testScrewParameters.SliteLength, Is.EqualTo(ScrewParameters.MIN_HEAD_DIAMETER
                 - ScrewParameters.SLITE_HEAD_DIFFERENCE),
                 "Сеттер не поменял знаечние зависимого параметра");
         }
