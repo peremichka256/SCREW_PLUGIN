@@ -1,7 +1,10 @@
 ﻿using Core;
+using Kompas;
 using Kompas6API5;
 using Kompas6Constants;
 using Kompas6Constants3D;
+using KompasAPI7;
+using System.Drawing;
 using System.Numerics;
 
 namespace KompasWrapper
@@ -59,7 +62,8 @@ namespace KompasWrapper
             //Построение основных частей винта
             BuildRod(_parameters.ScrewLength, _parameters.BaseDiameter,
                 _parameters.IndentLength, _parameters.HeadDiameter);
-            BuildHead(_parameters.HeadDiameter, _parameters.SliteLength, _parameters.BaseDiameter);
+            BuildHead(_parameters.HeadDiameter, _parameters.SliteLength,
+                _parameters.BaseDiameter, _parameters.ScrewdriverType);
 
             //Создание скругления между головкой и стержнем
             
@@ -76,7 +80,8 @@ namespace KompasWrapper
         /// </summary>
         /// <param name="headDiameter">Диаметр головки</param>
         /// <param name="slitLength">Длина шлица</param>
-        private void BuildHead(double headDiameter, double slitLength, double baseDiameter)
+        private void BuildHead(double headDiameter, double slitLength,
+            double baseDiameter, ScrewdriverTypes screwdriverType)
         {
             //Создание головки
             var sketch = CreateSketch(Obj3dType.o3d_planeXOZ);
@@ -87,16 +92,68 @@ namespace KompasWrapper
             СreateExtrusion(sketch, headDiameter /2 - baseDiameter / 2);
 
             //Вырезание шлица
-            var slitWidth = slitLength / 4;
-            var slitSketch = CreateSketch(Obj3dType.o3d_planeXOZ);
-            var slitDoc2d = (ksDocument2D)slitSketch.BeginEdit();
-            slitDoc2d.ksRectangle(DrawRectangle(-slitWidth / 2, -slitLength / 2,
-                slitLength, slitWidth));
-            slitDoc2d.ksRectangle(DrawRectangle(-slitLength / 2, -slitWidth / 2,
-                slitWidth, slitLength));
 
-            slitSketch.EndEdit();
-            СreateCutExtrusion(slitSketch, SLITE_DEPTH, SLITE_ANGLE, false);
+            switch (screwdriverType)
+            {
+                case ScrewdriverTypes.Hexagonal:
+                    {
+                        var slitWidth = slitLength / 4;
+                        var slitSketch = CreateSketch(Obj3dType.o3d_planeXOZ);
+                        var slitDoc2d = (ksDocument2D)slitSketch.BeginEdit();
+                        var radius = headDiameter / 2 - 1;
+                        var x = radius;
+                        var y = 0.0;
+                        var angle = 60 * Math.PI / 180;
+                        var points = new List<PointDoubleType>();
+                        points.Add(new PointDoubleType(x, y));
+                        for (var i = 1; i <= 5; i++)
+                        {
+                            points.Add(new PointDoubleType(radius * Math.Cos(i * angle),
+                                radius * Math.Sin(i * angle)));
+                        }
+
+                        for (var i = 0; i < points.Count; i++)
+                        {
+                            var nextIndex = i + 1;
+                            if (i == points.Count - 1)
+                            {
+                                nextIndex = 0;
+                            }
+                            slitDoc2d.ksLineSeg(points[i].X, points[i].Y,
+                                points[nextIndex].X, points[nextIndex].Y, 1);
+                        }
+                        slitSketch.EndEdit();
+                        СreateCutExtrusion(slitSketch, SLITE_DEPTH, SLITE_ANGLE, false);
+                        break;
+                    }
+                case ScrewdriverTypes.Cross:
+                    {
+                        var slitWidth = slitLength / 4;
+                        var slitSketch = CreateSketch(Obj3dType.o3d_planeXOZ);
+                        var slitDoc2d = (ksDocument2D)slitSketch.BeginEdit();
+                        slitDoc2d.ksRectangle(DrawRectangle(-slitWidth / 2, -slitLength / 2,
+                            slitLength, slitWidth));
+                        slitDoc2d.ksRectangle(DrawRectangle(-slitLength / 2, -slitWidth / 2,
+                            slitWidth, slitLength));
+
+                        slitSketch.EndEdit();
+                        СreateCutExtrusion(slitSketch, SLITE_DEPTH, SLITE_ANGLE, false);
+                        break;
+                    }
+                case ScrewdriverTypes.Slotted:
+                    {
+
+                        var slitWidth = slitLength / 4;
+                        var slitSketch = CreateSketch(Obj3dType.o3d_planeXOZ);
+                        var slitDoc2d = (ksDocument2D)slitSketch.BeginEdit();
+                        slitDoc2d.ksRectangle(DrawRectangle(-slitWidth / 2, -slitLength / 2,
+                            slitLength, slitWidth));
+
+                        slitSketch.EndEdit();
+                        СreateCutExtrusion(slitSketch, SLITE_DEPTH, SLITE_ANGLE, false);
+                        break;
+                    }
+            }
 
             //Создание фаски на головке
             var xCoordOfEdge = headDiameter / 2;

@@ -144,5 +144,33 @@ namespace UnitTests
                 - ScrewParameters.SLITE_HEAD_DIFFERENCE),
                 "Сеттер не поменял знаечние зависимого параметра");
         }
+
+        [TestCase(TestName = "Проверка корректного возврата" +
+                             " у свойства ScrewdriverType")]
+        public void TestScrewdriverType_CorrectGet()
+        {
+            var detailParameters = DefaultParameters;
+
+            var expected = ScrewdriverTypes.Cross;
+
+            detailParameters.ScrewdriverType = expected;
+
+            var actual = detailParameters.ScrewdriverType;
+
+            Assert.That(actual, Is.EqualTo(expected),
+                "Возвращенное значение не равно ожидаемому");
+        }
+
+        [TestCase(TestName = "Проверка корректного присвоения" +
+                             " значения свойству ScrewdriverType")]
+        public void TestScrewdriverType_CorrectSet()
+        {
+            var detailParameters = DefaultParameters;
+
+            var value = ScrewdriverTypes.Cross;
+
+            Assert.DoesNotThrow(() => detailParameters.ScrewdriverType = value,
+                "Не удалось присвоить корректное значение");
+        }
     }
 }

@@ -63,6 +63,8 @@ namespace PluginUI
                 textBox.Key.Text = _screwParameters
                     .GetParameterValueByName(textBox.Value).ToString();
             }
+
+            ScrewdriverTypeComboBox.SelectedIndex = (int)_screwParameters.ScrewdriverType;
         }
 
         /// <summary>
@@ -134,6 +136,12 @@ namespace PluginUI
                 toolTip.SetToolTip(textBox, exception.Message);
                 _isValueInTextBoxCorrect[textBox] = false;
             }
+        }
+
+        private void ScrewdriverTypeComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            _screwParameters.ScrewdriverType =
+                (ScrewdriverTypes)ScrewdriverTypeComboBox.SelectedIndex;
         }
     }
 }

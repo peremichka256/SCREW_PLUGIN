@@ -46,13 +46,15 @@
             this.IndentLengthTextBox = new System.Windows.Forms.TextBox();
             this.WaveguideParametersPictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
+            this.label7 = new System.Windows.Forms.Label();
+            this.ScrewdriverTypeComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WaveguideParametersPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // BuildButton
             // 
-            this.BuildButton.Location = new System.Drawing.Point(277, 305);
+            this.BuildButton.Location = new System.Drawing.Point(277, 315);
             this.BuildButton.Name = "BuildButton";
             this.BuildButton.Size = new System.Drawing.Size(82, 23);
             this.BuildButton.TabIndex = 0;
@@ -65,6 +67,7 @@
             this.tableLayoutPanel1.ColumnCount = 2;
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 74.63977F));
             this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 25.36023F));
+            this.tableLayoutPanel1.Controls.Add(this.label7, 0, 6);
             this.tableLayoutPanel1.Controls.Add(this.label1, 0, 0);
             this.tableLayoutPanel1.Controls.Add(this.label2, 0, 1);
             this.tableLayoutPanel1.Controls.Add(this.label3, 0, 2);
@@ -77,15 +80,17 @@
             this.tableLayoutPanel1.Controls.Add(this.label4, 0, 3);
             this.tableLayoutPanel1.Controls.Add(this.label5, 0, 4);
             this.tableLayoutPanel1.Controls.Add(this.IndentLengthTextBox, 1, 5);
+            this.tableLayoutPanel1.Controls.Add(this.ScrewdriverTypeComboBox, 1, 6);
             this.tableLayoutPanel1.Location = new System.Drawing.Point(25, 28);
             this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 6;
+            this.tableLayoutPanel1.RowCount = 7;
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 16.66667F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(334, 271);
             this.tableLayoutPanel1.TabIndex = 1;
@@ -102,7 +107,7 @@
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(3, 45);
+            this.label2.Location = new System.Drawing.Point(3, 41);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(243, 26);
             this.label2.TabIndex = 1;
@@ -111,7 +116,7 @@
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(3, 90);
+            this.label3.Location = new System.Drawing.Point(3, 82);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(136, 13);
             this.label3.TabIndex = 2;
@@ -120,7 +125,7 @@
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(3, 225);
+            this.label6.Location = new System.Drawing.Point(3, 205);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(143, 13);
             this.label6.TabIndex = 5;
@@ -136,7 +141,7 @@
             // 
             // SliteLengthTextBox
             // 
-            this.SliteLengthTextBox.Location = new System.Drawing.Point(252, 48);
+            this.SliteLengthTextBox.Location = new System.Drawing.Point(252, 44);
             this.SliteLengthTextBox.Name = "SliteLengthTextBox";
             this.SliteLengthTextBox.Size = new System.Drawing.Size(79, 20);
             this.SliteLengthTextBox.TabIndex = 7;
@@ -144,7 +149,7 @@
             // 
             // FilletRadiusTextBox
             // 
-            this.FilletRadiusTextBox.Location = new System.Drawing.Point(252, 93);
+            this.FilletRadiusTextBox.Location = new System.Drawing.Point(252, 85);
             this.FilletRadiusTextBox.Name = "FilletRadiusTextBox";
             this.FilletRadiusTextBox.Size = new System.Drawing.Size(79, 20);
             this.FilletRadiusTextBox.TabIndex = 8;
@@ -152,7 +157,7 @@
             // 
             // HeadDiameterTextBox
             // 
-            this.HeadDiameterTextBox.Location = new System.Drawing.Point(252, 138);
+            this.HeadDiameterTextBox.Location = new System.Drawing.Point(252, 126);
             this.HeadDiameterTextBox.Name = "HeadDiameterTextBox";
             this.HeadDiameterTextBox.Size = new System.Drawing.Size(79, 20);
             this.HeadDiameterTextBox.TabIndex = 9;
@@ -160,7 +165,7 @@
             // 
             // BaseDiameterTextBox
             // 
-            this.BaseDiameterTextBox.Location = new System.Drawing.Point(252, 183);
+            this.BaseDiameterTextBox.Location = new System.Drawing.Point(252, 167);
             this.BaseDiameterTextBox.Name = "BaseDiameterTextBox";
             this.BaseDiameterTextBox.Size = new System.Drawing.Size(79, 20);
             this.BaseDiameterTextBox.TabIndex = 10;
@@ -169,7 +174,7 @@
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(3, 135);
+            this.label4.Location = new System.Drawing.Point(3, 123);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(224, 26);
             this.label4.TabIndex = 3;
@@ -178,7 +183,7 @@
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(3, 180);
+            this.label5.Location = new System.Drawing.Point(3, 164);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(183, 13);
             this.label5.TabIndex = 4;
@@ -186,7 +191,7 @@
             // 
             // IndentLengthTextBox
             // 
-            this.IndentLengthTextBox.Location = new System.Drawing.Point(252, 228);
+            this.IndentLengthTextBox.Location = new System.Drawing.Point(252, 208);
             this.IndentLengthTextBox.Name = "IndentLengthTextBox";
             this.IndentLengthTextBox.Size = new System.Drawing.Size(79, 20);
             this.IndentLengthTextBox.TabIndex = 11;
@@ -197,16 +202,40 @@
             this.WaveguideParametersPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("WaveguideParametersPictureBox.Image")));
             this.WaveguideParametersPictureBox.Location = new System.Drawing.Point(377, 28);
             this.WaveguideParametersPictureBox.Name = "WaveguideParametersPictureBox";
-            this.WaveguideParametersPictureBox.Size = new System.Drawing.Size(151, 300);
+            this.WaveguideParametersPictureBox.Size = new System.Drawing.Size(163, 310);
             this.WaveguideParametersPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
             this.WaveguideParametersPictureBox.TabIndex = 65;
             this.WaveguideParametersPictureBox.TabStop = false;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 252);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Screwdriver type:";
+            // 
+            // ScrewdriverTypeComboBox
+            // 
+            this.ScrewdriverTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.ScrewdriverTypeComboBox.FormattingEnabled = true;
+            this.ScrewdriverTypeComboBox.Items.AddRange(new object[] {
+            "Hexagon",
+            "Cross",
+            "Slotted"});
+            this.ScrewdriverTypeComboBox.Location = new System.Drawing.Point(252, 249);
+            this.ScrewdriverTypeComboBox.Name = "ScrewdriverTypeComboBox";
+            this.ScrewdriverTypeComboBox.Size = new System.Drawing.Size(79, 21);
+            this.ScrewdriverTypeComboBox.TabIndex = 20;
+            this.ScrewdriverTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.ScrewdriverTypeComboBox_SelectedIndexChanged);
             // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(542, 340);
+            this.ClientSize = new System.Drawing.Size(552, 350);
             this.Controls.Add(this.WaveguideParametersPictureBox);
             this.Controls.Add(this.tableLayoutPanel1);
             this.Controls.Add(this.BuildButton);
@@ -238,6 +267,8 @@
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.PictureBox WaveguideParametersPictureBox;
         private System.Windows.Forms.ToolTip toolTip;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.ComboBox ScrewdriverTypeComboBox;
     }
 }
 

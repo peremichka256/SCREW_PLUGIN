@@ -48,6 +48,11 @@
                 MAX_INDENT_LENGTH, MIN_INDENT_LENGTH);
 
         /// <summary>
+        /// Возвращает и задает отверстие под отвёртку
+        /// </summary>
+        public ScrewdriverTypes ScrewdriverType { get; set; }
+
+        /// <summary>
         /// Словарь содержащий пары (Имя параметра, указатель на него)
         /// </summary>
         private Dictionary<ParameterNames, Parameter>
@@ -162,6 +167,7 @@
             HeadDiameter = MIN_HEAD_DIAMETER;
             BaseDiameter = MIN_BASE_DIAMETER;
             IndentLength = MIN_INDENT_LENGTH;
+            ScrewdriverType = ScrewdriverTypes.Cross;
         }
 
         /// <summary>
