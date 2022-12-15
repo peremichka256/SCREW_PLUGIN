@@ -378,7 +378,7 @@ namespace KompasWrapper
 		/// </summary>
 		/// <param name="sketch">Эскиз</param>
 		/// <param name="trajectory">Траектория</param>
-		public void CutTrajectoryEvolution(ksSketchDefinition sketch, ksEntity trajectory)
+		private void CutTrajectoryEvolution(ksSketchDefinition sketch, ksEntity trajectory)
         {
             ksEntity cinematicEvolition =
                 (ksEntity)_connector.Part.NewEntity((short)Obj3dType.o3d_cutEvolution);
