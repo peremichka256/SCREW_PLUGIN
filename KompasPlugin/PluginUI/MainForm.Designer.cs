@@ -32,6 +32,7 @@
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(MainForm));
             this.BuildButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.label7 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -44,10 +45,9 @@
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.IndentLengthTextBox = new System.Windows.Forms.TextBox();
+            this.ScrewdriverTypeComboBox = new System.Windows.Forms.ComboBox();
             this.WaveguideParametersPictureBox = new System.Windows.Forms.PictureBox();
             this.toolTip = new System.Windows.Forms.ToolTip(this.components);
-            this.label7 = new System.Windows.Forms.Label();
-            this.ScrewdriverTypeComboBox = new System.Windows.Forms.ComboBox();
             this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.WaveguideParametersPictureBox)).BeginInit();
             this.SuspendLayout();
@@ -94,6 +94,16 @@
             this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel1.Size = new System.Drawing.Size(334, 271);
             this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // label7
+            // 
+            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(3, 252);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(89, 13);
+            this.label7.TabIndex = 19;
+            this.label7.Text = "Screwdriver type:";
             // 
             // label1
             // 
@@ -197,26 +207,6 @@
             this.IndentLengthTextBox.TabIndex = 11;
             this.IndentLengthTextBox.TextChanged += new System.EventHandler(this.TextBox_TextChanged);
             // 
-            // WaveguideParametersPictureBox
-            // 
-            this.WaveguideParametersPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("WaveguideParametersPictureBox.Image")));
-            this.WaveguideParametersPictureBox.Location = new System.Drawing.Point(377, 28);
-            this.WaveguideParametersPictureBox.Name = "WaveguideParametersPictureBox";
-            this.WaveguideParametersPictureBox.Size = new System.Drawing.Size(163, 310);
-            this.WaveguideParametersPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
-            this.WaveguideParametersPictureBox.TabIndex = 65;
-            this.WaveguideParametersPictureBox.TabStop = false;
-            // 
-            // label7
-            // 
-            this.label7.Anchor = System.Windows.Forms.AnchorStyles.Left;
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(3, 252);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(89, 13);
-            this.label7.TabIndex = 19;
-            this.label7.Text = "Screwdriver type:";
-            // 
             // ScrewdriverTypeComboBox
             // 
             this.ScrewdriverTypeComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
@@ -230,6 +220,16 @@
             this.ScrewdriverTypeComboBox.Size = new System.Drawing.Size(79, 21);
             this.ScrewdriverTypeComboBox.TabIndex = 20;
             this.ScrewdriverTypeComboBox.SelectedIndexChanged += new System.EventHandler(this.ScrewdriverTypeComboBox_SelectedIndexChanged);
+            // 
+            // WaveguideParametersPictureBox
+            // 
+            this.WaveguideParametersPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("WaveguideParametersPictureBox.Image")));
+            this.WaveguideParametersPictureBox.Location = new System.Drawing.Point(377, 28);
+            this.WaveguideParametersPictureBox.Name = "WaveguideParametersPictureBox";
+            this.WaveguideParametersPictureBox.Size = new System.Drawing.Size(163, 310);
+            this.WaveguideParametersPictureBox.SizeMode = System.Windows.Forms.PictureBoxSizeMode.Zoom;
+            this.WaveguideParametersPictureBox.TabIndex = 65;
+            this.WaveguideParametersPictureBox.TabStop = false;
             // 
             // MainForm
             // 

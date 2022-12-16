@@ -1,10 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.ComponentModel;
+using System.Diagnostics;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 using Core;
 using KompasWrapper;
+using Microsoft.VisualBasic.Devices;
 
 namespace PluginUI
 {
@@ -72,11 +75,28 @@ namespace PluginUI
         /// </summary>
         private void BuildButton_Click(object sender, EventArgs e)
         {
+
+            _screwBuilder.BuildScrew();
             var connector = new KompasConnector();
+            var stopWatch = new Stopwatch();
+            stopWatch.Start();
             _screwBuilder =
                 new ScrewBuilder(_screwParameters, connector);
 
-            _screwBuilder.BuildScrew();
+            int countModel = 0;
+            using (StreamWriter writter = new StreamWriter("D:\\Рабочий стол\\log.txt", true))
+            {
+                while (true)
+                {
+                    _screwBuilder.BuildScrew();
+                    var computerInfo = new ComputerInfo();
+                    var usedMemory = (computerInfo.TotalPhysicalMemory - computerInfo.AvailablePhysicalMemory)
+                                     * 0.000000000931322574615478515625;
+                    countModel++;
+                    writter.WriteLineAsync($"{countModel}\t{stopWatch.Elapsed:hh\\:mm\\:ss}\t{usedMemory}");
+                    writter.Flush();
+                }
+            }
         }
 
         private void TextBox_TextChanged(object sender, EventArgs e)
